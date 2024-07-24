@@ -1,28 +1,59 @@
-# Cow wisdom web server
+## Containerisation and Deployment of Wisecow Application on Kubernetes
 
-## Prerequisites
+## Objective
+To containerize and deploy the Wisecow application, hosted in the GitHub repository (https://github.com/nyrahul/wisecow), on a Kubernetes environment with secure TLS communication.
 
-```
-sudo apt install fortune-mod cowsay -y
-```
+## Dockerization
+Develop a Dockerfile for creating a container image of the Wisecow application.
 
-## How to use?
+## Kubernetes Deployment
+Craft Kubernetes manifest files for deploying the Wisecow application in a Kubernetes environment.
+The Wisecow app must be exposed as a Kubernetes service for accessibility.
 
-1. Run `./wisecow.sh`
-2. Point the browser to server port (default 4499)
+## Continuous Integration and Deployment (CI/CD)
+Implement a GitHub Actions workflow for:
+Automating the build and push of the Docker image to a container registry whenever changes are committed to the repository.
+Continuous Deployment [Challenge Goal]: Automatically deploy the updated application to the Kubernetes environment following successful image builds.
 
-## What to expect?
-![wisecow](https://github.com/nyrahul/wisecow/assets/9133227/8d6bfde3-4a5a-480e-8d55-3fef60300d98)
+## TLS Implementation [Challenge Goal]
+Ensure that the Wisecow application supports secure TLS communication.
 
-# Problem Statement
-Deploy the wisecow application as a k8s app
+## 1. Dockerization
+    Created a Dockerfile for the Wisecow application.
+    
+## 2. Kubernetes Deployment
+Deployment Manifest:
+    Created deployment.yaml for Kubernetes Deployment.
+Service Manifest:
+    Created service.yaml for Kubernetes Service.
 
-## Requirement
-1. Create Dockerfile for the image and corresponding k8s manifest to deploy in k8s env. The wisecow service should be exposed as k8s service.
-2. Github action for creating new image when changes are made to this repo
-3. [Challenge goal]: Enable secure TLS communication for the wisecow app.
+## 3. Continuous Integration and Deployment (CI/CD)
+GitHub Actions Workflow
+    Created .github/workflows/ci-cd.yml for CI/CD
 
-## Expected Artifacts
-1. Github repo containing the app with corresponding dockerfile, k8s manifest, any other artifacts needed.
-2. Github repo with corresponding github action.
-3. Github repo should be kept private and the access should be enabled for following github IDs: nyrahul, SujithKasireddy
+## 4. TLS Implementation
+  To enable secure TLS communication, configure the Ingress resource in Kubernetes with TLS certificates. This ensures that all traffic to the Wisecow application is encrypted.
+Ingress Manifest for TLS
+    Created ingress.yaml for Kubernetes Ingress with TLS
+
+## Setup and Usage
+1.Clone the repository:
+    git clone https://github.com/nyrahul/wisecow.git
+    cd wisecow
+    
+2.Build the Docker image:
+    docker build -t <your-container-registry>/wisecow:latest .
+    
+3.Push the Docker image to your registry:
+    docker push <your-container-registry>/wisecow:latest
+
+4.Deploy to Kubernetes:
+    kubectl apply -f deployment.yaml
+    kubectl apply -f service.yaml
+    kubectl apply -f ingress.yaml
+
+
+
+
+
+
